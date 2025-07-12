@@ -14,13 +14,186 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      items: {
+        Row: {
+          category: string
+          condition: string
+          created_at: string
+          description: string | null
+          id: string
+          images: string[] | null
+          item_type: string
+          points_value: number
+          size: string
+          status: string
+          tags: string[] | null
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          category: string
+          condition: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          images?: string[] | null
+          item_type: string
+          points_value?: number
+          size: string
+          status?: string
+          tags?: string[] | null
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          category?: string
+          condition?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          images?: string[] | null
+          item_type?: string
+          points_value?: number
+          size?: string
+          status?: string
+          tags?: string[] | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      notifications: {
+        Row: {
+          created_at: string
+          id: string
+          message: string
+          read: boolean
+          related_id: string | null
+          title: string
+          type: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          message: string
+          read?: boolean
+          related_id?: string | null
+          title: string
+          type: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          message?: string
+          read?: boolean
+          related_id?: string | null
+          title?: string
+          type?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          full_name: string | null
+          id: string
+          location: string | null
+          points: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          location?: string | null
+          points?: number | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          location?: string | null
+          points?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      swap_requests: {
+        Row: {
+          created_at: string
+          id: string
+          is_point_swap: boolean
+          message: string | null
+          offered_item_id: string | null
+          owner_id: string
+          requested_item_id: string
+          requester_id: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_point_swap?: boolean
+          message?: string | null
+          offered_item_id?: string | null
+          owner_id: string
+          requested_item_id: string
+          requester_id: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_point_swap?: boolean
+          message?: string | null
+          offered_item_id?: string | null
+          owner_id?: string
+          requested_item_id?: string
+          requester_id?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "swap_requests_offered_item_id_fkey"
+            columns: ["offered_item_id"]
+            isOneToOne: false
+            referencedRelation: "items"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "swap_requests_requested_item_id_fkey"
+            columns: ["requested_item_id"]
+            isOneToOne: false
+            referencedRelation: "items"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      complete_swap: {
+        Args: { swap_request_id: string }
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never

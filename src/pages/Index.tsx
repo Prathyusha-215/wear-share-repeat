@@ -1,3 +1,4 @@
+import { useAuth } from "@/hooks/useAuth";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import FeaturedItems from "@/components/FeaturedItems";
